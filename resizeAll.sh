@@ -1,5 +1,5 @@
   #!/bin/bash
-#Resize all images in a Folder
+#Resize all images in a Folder using imagemagick
 
 #Get a file as an input - if it is not a file it will not work
 [ $# -ge 1 -a -f "$1" ] && input="$1" || input="-"
