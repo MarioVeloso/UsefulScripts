@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#using imagemagick
-mogrify -format jpg ./trainA/*.png
-rm ./trainA/*.png
-mogrify -format jpg ./trainB/*.png
-rm ./trainB/*.png
+# Usage
+cat "usage : sh pngtojpg.sh path/to/folder/"
+
+# Using imagemagick
+mogrify -format jpg $1*.png
+rm $1*.png
