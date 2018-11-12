@@ -22,6 +22,15 @@ for dist_name in dist_names:
     plt.xlim(0,47)
 plt.legend(loc='upper left')
 plt.show()
+#NB : from scipy.stats._continuous_distns import _distn_names #all dist names
+
+
+#fit() method mentioned by @Saullo Castro provides maximum likelihood estimates (MLE). The best distribution for your data is the one give you the highest can be determined by several different ways: such as
+#1, the one that gives you the highest log likelihood.
+#2, the one that gives you the smallest AIC, BIC or BICc values (see wiki: http://en.wikipedia.org/wiki/Akaike_information_criterion, basically can be viewed as log likelihood adjusted for number of parameters, as distribution with more parameters are expected to fit better)
+#3, the one that maximize the Bayesian posterior probability. (see wiki: http://en.wikipedia.org/wiki/Posterior_probability)
+#Of course, if you already have a distribution that should describe you data (based on the theories in your particular field) and want to stick to that, you will skip the step of identifying the best fit distribution.
+#scipy does not come with a function to calculate log likelihood (although MLE method is provided), but hard code one is easy: see Is the build-in probability density functions of `scipy.stat.distributions` slower than a user provided one?
 
 # from https://stackoverflow.com/questions/6620471/fitting-empirical-distribution-to-theoretical-ones-with-scipy-python
 # This is an update and modification to Saullo's answer, that uses the full list of the current scipy.stats distributions and returns the distribution with the least SSE between the distribution's histogram and the data's histogram.
