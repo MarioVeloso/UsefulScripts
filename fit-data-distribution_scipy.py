@@ -1,3 +1,28 @@
+
+# from https://stackoverflow.com/questions/6620471/fitting-empirical-distribution-to-theoretical-ones-with-scipy-python
+# Saullo's answer
+import matplotlib.pyplot as plt
+import scipy
+import scipy.stats
+size = 20000
+x = scipy.arange(size)
+# creating the dummy sample (using beta distribution)
+y = scipy.int_(scipy.round_(scipy.stats.beta.rvs(6,2,size=size)*47))
+# creating the histogram
+h = plt.hist(y, bins=range(48))
+
+dist_names = ['alpha', 'beta', 'arcsine',
+              'weibull_min', 'weibull_max', 'rayleigh']
+
+for dist_name in dist_names:
+    dist = getattr(scipy.stats, dist_name)
+    param = dist.fit(y)
+    pdf_fitted = dist.pdf(x, *param[:-2], loc=param[-2], scale=param[-1]) * size
+    plt.plot(pdf_fitted, label=dist_name)
+    plt.xlim(0,47)
+plt.legend(loc='upper left')
+plt.show()
+
 # from https://stackoverflow.com/questions/6620471/fitting-empirical-distribution-to-theoretical-ones-with-scipy-python
 # This is an update and modification to Saullo's answer, that uses the full list of the current scipy.stats distributions and returns the distribution with the least SSE between the distribution's histogram and the data's histogram.
 # Using the El Niño dataset from statsmodels, the distributions are fit and error is determined. The distribution with the least error is returned. 
