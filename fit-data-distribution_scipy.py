@@ -9,7 +9,7 @@ x = scipy.arange(size)
 # creating the dummy sample (using beta distribution)
 y = scipy.int_(scipy.round_(scipy.stats.beta.rvs(6,2,size=size)*47))
 # creating the histogram
-h = plt.hist(y, bins=range(48))
+h = plt.hist(y, bins=range(48), density=True)
 
 dist_names = ['alpha', 'beta', 'arcsine',
               'weibull_min', 'weibull_max', 'rayleigh']
@@ -17,7 +17,7 @@ dist_names = ['alpha', 'beta', 'arcsine',
 for dist_name in dist_names:
     dist = getattr(scipy.stats, dist_name)
     param = dist.fit(y)
-    pdf_fitted = dist.pdf(x, *param[:-2], loc=param[-2], scale=param[-1]) * size
+    pdf_fitted = dist.pdf(x, *param[:-2], loc=param[-2], scale=param[-1])
     plt.plot(pdf_fitted, label=dist_name)
     plt.xlim(0,47)
 plt.legend(loc='upper left')
