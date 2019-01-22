@@ -1,0 +1,1 @@
+mogrify -type Grayscale ./*/*.png 
